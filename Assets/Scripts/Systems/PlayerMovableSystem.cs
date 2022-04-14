@@ -17,7 +17,6 @@ namespace Systems
             {
                 ref var playerComponent = ref playerComponentPool.Get(entity);
                 ref var playerMoveComponent = ref playerMoveComponentPool.Get(entity);
-                ref var playerInputComponent = ref playerInputComponentPool.Get(entity);
 
                 bool isPlayerOnPlace = 
                     playerComponent.playerTransform.position == playerComponent.destinationPosition;
@@ -25,11 +24,22 @@ namespace Systems
                 playerMoveComponent.isMoving = !isPlayerOnPlace
                     ? true
                     : false;
+                
+                // Debug.Log("Pos = "+playerComponent.playerTransform.position);
+                // Debug.Log("TG = "+playerComponent.destinationPosition);
+                // Debug.Log("IM = "+isPlayerOnPlace);
 
                 if (playerMoveComponent.isMoving)
+                {
+                    ref var playerInputComponent = ref playerInputComponentPool.Get(entity);
+                    Quaternion targetRotation = Quaternion.LookRotation(playerInputComponent.direction);
+                    playerComponent.playerTransform.rotation = Quaternion.Lerp(playerComponent.playerTransform.rotation,
+                        targetRotation, playerComponent.rotateSpeed * Time.deltaTime);
+                    
                     playerComponent.playerTransform.position =
                         Vector3.MoveTowards(playerComponent.playerTransform.position,
                             playerComponent.destinationPosition, Time.deltaTime * playerMoveComponent.speed);
+                }
             }
         }
     }

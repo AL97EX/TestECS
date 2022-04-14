@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 532ac4bbecce40f2bb4e8cf99d74f0ca, type: 3}
   m_Name: PlayerData
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3378997191600360102, guid: 902c075288b138543b4315ae80f65a3d, type: 3}
+  prefab: {fileID: 8211744012310783623, guid: 80c1240aaa84440469d38d087c7adc1b, type: 3}
   spawnPoint: {x: 0, y: 5, z: 0}
   clickGroundMask:
     serializedVersion: 2
     m_Bits: 64
-  speed: 5
+  speed: 2
+  rotateSpeed: 3

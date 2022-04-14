@@ -9,6 +9,7 @@ namespace MonoBehaviours
 {
     public class Startup : MonoBehaviour
     {
+        [SerializeField] private GameObject winPanel;
         [SerializeField] private Door[] doors;
         private EcsWorld _ecsWorld;
         private EcsSystems initSystems;
@@ -19,6 +20,7 @@ namespace MonoBehaviours
         {
             _ecsWorld = new EcsWorld();
             var gameData = new GameData();
+            gameData.winPanel = winPanel;
             gameData.doors = new DoorComponent[doors.Length];
             for (int i = 0; i < doors.Length; i++)
             {
@@ -36,6 +38,8 @@ namespace MonoBehaviours
             updateSystems = new EcsSystems(_ecsWorld, gameData);
             updateSystems.Add(new PlayerInputSystem());
             updateSystems.Add(new DoorOpeningSystem());
+            updateSystems.Add(new AnimationCharacterSystem());
+            updateSystems.Add(new WinSystem());
             updateSystems.Init();
             
             fixedUpdateSystems = new EcsSystems(_ecsWorld);

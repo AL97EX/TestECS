@@ -3,6 +3,7 @@ using Leopotam.EcsLite;
 using MonoBehaviours;
 using ScriptableObjects;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Systems
 {
@@ -34,8 +35,12 @@ namespace Systems
                 Quaternion.identity);
             spawnedPrefab.GetComponent<HitCheckerView>().ecsWorld = ecsWorld;
             
-            playerAnimComponent.animator = spawnedPrefab.GetComponent<Animator>();
+            playerComponent.rotateSpeed = PlayerData.Instance.rotateSpeed;
+            playerComponent.collider = spawnedPrefab.GetComponent<CapsuleCollider>();
+            playerComponent.rb = spawnedPrefab.GetComponent<Rigidbody>();
             playerComponent.playerTransform = spawnedPrefab.transform;
+            
+            playerAnimComponent.animator = spawnedPrefab.GetComponent<Animator>();
             playerInputComponent.clickGroundMask = PlayerData.Instance.clickGroundMask;
         }
     }

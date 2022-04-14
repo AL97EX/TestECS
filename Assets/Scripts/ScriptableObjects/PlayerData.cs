@@ -12,6 +12,7 @@ namespace ScriptableObjects
         public Vector3 spawnPoint;
         public LayerMask clickGroundMask;
         public float speed;
+        public float rotateSpeed;
 
         private void OnEnable()
         {

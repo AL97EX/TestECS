@@ -24,6 +24,7 @@ namespace Systems
                     if (Physics.Raycast(myRay, out hitInfo, 1000, playerInput.clickGroundMask))
                     {
                         playerComponent.destinationPosition = hitInfo.point;
+                        playerInput.direction = hitInfo.point - playerComponent.playerTransform.position;
                     }
                 }
             }
